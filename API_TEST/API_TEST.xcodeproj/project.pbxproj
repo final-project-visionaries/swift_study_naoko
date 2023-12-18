@@ -13,6 +13,7 @@
 		CEC7D8562B30257A00C4B152 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEC7D8552B30257A00C4B152 /* Preview Assets.xcassets */; };
 		CEC7D85E2B30286900C4B152 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CEC7D85D2B30286900C4B152 /* Alamofire */; };
 		CEC7D8622B30363000C4B152 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = CEC7D8612B30363000C4B152 /* SwiftyJSON */; };
+		CEC7D86A2B3089B900C4B152 /* images.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC7D8692B3089B900C4B152 /* images.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		CEC7D8522B30257A00C4B152 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEC7D8552B30257A00C4B152 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CEC7D85F2B302E4100C4B152 /* API-TEST-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "API-TEST-Info.plist"; sourceTree = SOURCE_ROOT; };
+		CEC7D8692B3089B900C4B152 /* images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = images.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		CEC7D84D2B30257800C4B152 /* API_TEST */ = {
 			isa = PBXGroup;
 			children = (
+				CEC7D8682B30896D00C4B152 /* api */,
 				CEC7D85F2B302E4100C4B152 /* API-TEST-Info.plist */,
 				CEC7D84E2B30257800C4B152 /* API_TESTApp.swift */,
 				CEC7D8502B30257800C4B152 /* ContentView.swift */,
@@ -71,6 +74,14 @@
 				CEC7D8552B30257A00C4B152 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CEC7D8682B30896D00C4B152 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				CEC7D8692B3089B900C4B152 /* images.swift */,
+			);
+			path = api;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,6 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEC7D8512B30257800C4B152 /* ContentView.swift in Sources */,
+				CEC7D86A2B3089B900C4B152 /* images.swift in Sources */,
 				CEC7D84F2B30257800C4B152 /* API_TESTApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
