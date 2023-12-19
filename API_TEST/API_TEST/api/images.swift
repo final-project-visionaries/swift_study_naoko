@@ -7,20 +7,20 @@
 import SwiftUI
 import Alamofire
 
-struct Image: Codable {
+struct ApiImage: Codable {
     var id:Int
     var image_name: String
     var image_data : String
     var updated_at : String
 }
 
-func getRequest(completion: @escaping ([[String: Any]]) -> Void) {
-//    AF.request("http://localhost:4242/api/v1/images", method: .get)
-    AF.request("https://drawingtraveler-server.onrender.com/api/v1/images", method: .get)
+func apiImageGetRequest(completion: @escaping ([[String: Any]]) -> Void) {
+    AF.request("http://localhost:4242/api/v1/images", method: .get)
+//    AF.request("https://drawingtraveler-server.onrender.com/api/v1/images", method: .get)
         .response { response in
             let decoder = JSONDecoder()
             do {
-                let images = try decoder.decode([Image].self, from: response.data!)
+                let images = try decoder.decode([ApiImage].self, from: response.data!)
                 var decodedImages : [[String: Any]] = []
 
                 for image in images {
@@ -32,6 +32,28 @@ func getRequest(completion: @escaping ([[String: Any]]) -> Void) {
                     decodedImages.append(dictionary)
                 }
                 completion(decodedImages)
+            } catch {
+                print("Error decoding JSON: (error)")
+            }
+        }
+}
+
+//postリクエストの返り値の型定義
+struct ResponseMessage: Codable {
+    var message:String
+}
+//postメソッド
+func apiImagePostReqest(reqBody : [String: String]){
+    // All three of these calls are equivalent
+    AF.request("http://localhost:4242/api/v1/images", method: .post, parameters: reqBody)
+        .response{ response in
+            let decoder = JSONDecoder()
+            do {
+                //responseをJSON形式にデコード(返り値がmessage:"新規登録完了")
+                let message = try decoder.decode(ResponseMessage.self, from: response.data!)
+                var decodedMessage : [String: Any] = [:]
+                decodedMessage["message"] = message.message
+                print("message : \(decodedMessage["message"]!)")
             } catch {
                 print("Error decoding JSON: (error)")
             }
