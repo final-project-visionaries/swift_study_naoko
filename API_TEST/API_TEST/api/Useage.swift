@@ -1,4 +1,11 @@
 //
+//  Useage.swift
+//  API_TEST
+//
+//  Created by user on 2023/12/19.
+//
+
+//
 //  ContentView.swift
 //  API_TEST
 //
@@ -9,7 +16,7 @@ import SwiftUI
 import Alamofire
 
 
-struct ContentView: View {
+struct Useage: View {
     @State private var imagesData: [[String: Any]] = [] // 結果を格納するための変数を作成します。
     
     var body: some View {
@@ -76,5 +83,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    Useage()
 }

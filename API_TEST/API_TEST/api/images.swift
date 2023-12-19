@@ -13,10 +13,11 @@ struct ApiImage: Codable {
     var image_data : String
     var updated_at : String
 }
+var apiEndPoint = "http://localhost:4242/api/v1/images"
+//var apiEndPoint = "https://drawingtraveler-server.onrender.com/api/v1/images"
 
 func apiImageGetRequest(completion: @escaping ([[String: Any]]) -> Void) {
-    AF.request("http://localhost:4242/api/v1/images", method: .get)
-//    AF.request("https://drawingtraveler-server.onrender.com/api/v1/images", method: .get)
+    AF.request(apiEndPoint, method: .get)
         .response { response in
             let decoder = JSONDecoder()
             do {
@@ -43,13 +44,45 @@ struct ResponseMessage: Codable {
     var message:String
 }
 //postメソッド
-func apiImagePostReqest(reqBody : [String: String]){
+func apiImagePostRequest(reqBody : [String: String]){
     // All three of these calls are equivalent
-    AF.request("http://localhost:4242/api/v1/images", method: .post, parameters: reqBody)
+    AF.request(apiEndPoint, method: .post, parameters: reqBody)
         .response{ response in
             let decoder = JSONDecoder()
             do {
                 //responseをJSON形式にデコード(返り値がmessage:"新規登録完了")
+                let message = try decoder.decode(ResponseMessage.self, from: response.data!)
+                var decodedMessage : [String: Any] = [:]
+                decodedMessage["message"] = message.message
+                print("message : \(decodedMessage["message"]!)")
+            } catch {
+                print("Error decoding JSON: (error)")
+            }
+        }
+}
+//deleteメソッド
+func apiImageDeleteRequest(imageID : Int){
+    AF.request("\(apiEndPoint)/\(imageID)", method: .delete)
+        .response{ response in
+            let decoder = JSONDecoder()
+            do {
+                //responseをJSON形式にデコード(返り値がmessage:"削除完了")
+                let message = try decoder.decode(ResponseMessage.self, from: response.data!)
+                var decodedMessage : [String: Any] = [:]
+                decodedMessage["message"] = message.message
+                print("message : \(decodedMessage["message"]!)")
+            } catch {
+                print("Error decoding JSON: (error)")
+            }
+        }
+}
+//updateメソッド
+func apiImageUpdateReqest(reqBody : [String : String],imageID : Int){
+    AF.request("\(apiEndPoint)/\(imageID)", method: .patch, parameters: reqBody)
+        .response{ response in
+            let decoder = JSONDecoder()
+            do {
+                //responseをJSON形式にデコード(返り値がmessage:"修正完了")
                 let message = try decoder.decode(ResponseMessage.self, from: response.data!)
                 var decodedMessage : [String: Any] = [:]
                 decodedMessage["message"] = message.message
