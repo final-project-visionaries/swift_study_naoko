@@ -14,45 +14,46 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Button(action:{
-                print("ボタン押しました")
-                //getRequestが非同期処理だから、その処理が終わった後に実行するコールバック{}.thenのイメージ
-                apiImageGetRequest { decodedImages in
-                    self.imagesData = decodedImages
-                    print(self.imagesData[0]["image_data"]!)
-                    print(self.imagesData[1])
-                    print(self.imagesData[2])
-                    
-                }
-            }
-            )
-            {
-                Text("getメソッド")
-            }
+//            Button(action:{
+//                print("ボタン押しました")
+//                //getRequestが非同期処理だから、その処理が終わった後に実行するコールバック{}.thenのイメージ
+//                apiImageGetRequest { decodedImages in
+//                    self.imagesData = decodedImages
+//                    print(self.imagesData[0]["image_data"]!)
+//                    print(self.imagesData[1])
+//                    print(self.imagesData[2])
+//                    
+//                }
+//            }
+//            )
+//            {
+//                Text("getメソッド")
+//            }
             //actionのvalueは関数でなければならない
             //引数を渡したい場合は、{}で括って、クロージャーの中で呼び出す
-            Button(action: { () -> () in
-                //postで渡す辞書型のデータを作る仮の関数（本番はフロントで作成）
-                let tempData = getTempData()
-                //postリクエストを引数を渡して実行
-                apiImagePostRequest(reqBody: tempData)
-            })
-            {
-                Text("postメソッド")
-            }
-            Button(action: { () -> () in
-                apiImageDeleteRequest(imageID: 36)
-            })
-            {
-                Text("deleteメソッド")
-            }
-            Button(action: { () -> () in
-                let tempData = getTempData2()
-                apiImageUpdateReqest(reqBody: tempData, imageID: 29)
-            })
-            {
-                Text("updateメソッド")
-            }
+//            Button(action: { () -> () in
+//                //postで渡す辞書型のデータを作る仮の関数（本番はフロントで作成）
+//                let tempData = getTempData()
+//                //postリクエストを引数を渡して実行
+//                apiImagePostRequest(reqBody: tempData)
+//            })
+//            {
+//                Text("postメソッド")
+//            }
+//            Button(action: { () -> () in
+//                apiImageDeleteRequest(imageID: 36)
+//            })
+//            {
+//                Text("deleteメソッド")
+//            }
+//            Button(action: { () -> () in
+//                let tempData = getTempData2()
+//                apiImageUpdateReqest(reqBody: tempData, imageID: 29)
+//            })
+//            {
+//                Text("updateメソッド")
+//            }
+            Text("hello!")
         }
         .padding()
     }

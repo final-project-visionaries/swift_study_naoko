@@ -23,12 +23,13 @@ struct Useage: View {
         VStack {
             Button(action:{
                 print("ボタン押しました")
-                //getRequestが非同期処理だから、その処理が終わった後に実行するコールバック{}.thenのイメージ
-                apiImageGetRequest { decodedImages in
-                    self.imagesData = decodedImages
-                    print(self.imagesData[0]["image_data"]!)
-                    print(self.imagesData[1])
-                    print(self.imagesData[2])
+                //非同期関数を呼ぶ時のみTask(=async)でラッピングする
+                Task {
+                    let result = await apiImageGetRequest()
+                    for elm in result {
+                        print("result : \(elm["image_name"]!)")
+                    }
+//                    print("result : \(result[0]["image_data"]!)")
                     
                 }
             }
@@ -40,22 +41,33 @@ struct Useage: View {
             //引数を渡したい場合は、{}で括って、クロージャーの中で呼び出す
             Button(action: { () -> () in
                 //postで渡す辞書型のデータを作る仮の関数（本番はフロントで作成）
-                let tempData = getTempData()
-                //postリクエストを引数を渡して実行
-                apiImagePostRequest(reqBody: tempData)
+                Task {
+                    let tempData = getTempData()
+                    //postリクエストを引数を渡して実行
+                    let result = await apiImagePostRequest(reqBody: tempData)
+                    print("result : \(result)")
+                }
             })
             {
                 Text("postメソッド")
             }
             Button(action: { () -> () in
-                apiImageDeleteRequest(imageID: 36)
+                Task {
+                    let result = await apiImageDeleteRequest(imageID: 38)
+                    print("result : \(result)")
+                }
+                
             })
             {
                 Text("deleteメソッド")
             }
             Button(action: { () -> () in
-                let tempData = getTempData2()
-                apiImageUpdateReqest(reqBody: tempData, imageID: 29)
+                Task    {
+                    let tempData = getTempData2()
+                    let result = await apiImageUpdateReqest(reqBody: tempData, imageID: 41)
+                    print("result : \(result)")
+                }
+
             })
             {
                 Text("updateメソッド")
